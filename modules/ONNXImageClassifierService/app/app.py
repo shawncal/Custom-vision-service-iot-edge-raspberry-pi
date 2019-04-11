@@ -25,7 +25,7 @@ def index():
     return 'CustomVision.ai model host harness'
 
 # Like the CustomVision.ai Prediction service /image route handles either
-#     - octet-stream image file 
+#     - octet-stream image file
 #     - a multipart/form-data with files in the imageData parameter
 @app.route('/image', methods=['POST'])
 def predict_image_handler():
@@ -48,7 +48,7 @@ def predict_image_handler():
 
 # Like the CustomVision.ai Prediction service /url route handles url's
 # in the body of hte request of the form:
-#     { 'Url': '<http url>'}  
+#     { 'Url': '<http url>'}
 @app.route('/url', methods=['POST'])
 def predict_url_handler():
     try:
