@@ -43,7 +43,7 @@
             "restartPolicy": "always",
             "env": {
               "VIDEO_PATH": { "value": "./AppleAndBanana.mp4"},
-              "IMAGE_PROCESSING_ENDPOINT": { "value": "http://image-classifier-service:80/image"},
+              "IMAGE_PROCESSING_ENDPOINT": { "value": "http://onnx-image-classifier-service:8088/image"},
               "VERBOSE": { "value": "True"},
               "RESIZE_WIDTH": { "value": "256"},
               "RESIZE_HEIGHT": { "value": "256"},
@@ -68,6 +68,22 @@
             "settings": {
               "image": "${MODULES.ImageClassifierService.amd64}",
               "createOptions": ""
+            }
+          },
+          "onnx-image-classifier-service": {
+            "version": "1.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "${MODULES.ONNXImageClassifierService.amd64}",
+              "createOptions": {
+                "HostConfig": {
+                  "PortBindings": {
+                    "8088/tcp": [ { "HostPort":"8088"}]
+                  }
+                }
+              }
             }
           }
         }

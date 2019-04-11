@@ -7,7 +7,6 @@ RUN echo "BUILD MODULE: ONNXImageClassifierService"
 RUN [ "cross-build-start" ]
 
 RUN install_packages \
-    sudo \
     build-essential \
     curl \
     libcurl4-openssl-dev \
@@ -65,6 +64,10 @@ RUN install_packages \
     zlib1g-dev \
     libjpeg-dev \
     libatlas-base-dev
+
+# Cleanup
+RUN rm -rf /var/lib/apt/lists/* \
+    && apt-get -y autoremove
 
 RUN [ "cross-build-end" ]
 
