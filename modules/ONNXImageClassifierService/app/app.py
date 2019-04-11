@@ -36,7 +36,6 @@ def predict_image_handler():
         else:
             imageData = io.BytesIO(request.get_data())
 
-        #img = scipy.misc.imread(imageData)
         img = Image.open(imageData)
         results = predict_image(img)
         return json.dumps(results)
