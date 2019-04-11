@@ -48,9 +48,9 @@
             "restartPolicy": "always",
             "env": {
               "VIDEO_PATH": {"value": "0"},
-              "IMAGE_PROCESSING_ENDPOINT":  {"value": "http://image-classifier-service:80/image"},
-              "RESIZE_WIDTH":  {"value": "256"},
-              "RESIZE_HEIGHT":  {"value": "256"},
+              "IMAGE_PROCESSING_ENDPOINT":  {"value": "http://onnx-image-classifier-service:8088/image"},
+              "RESIZE_WIDTH":  {"value": "224"},
+              "RESIZE_HEIGHT":  {"value": "224"},
               "SHOW_VIDEO":  {"value": "True"}
             },
             "settings": {
@@ -92,6 +92,22 @@
             "settings": {
               "image": "${MODULES.ImageClassifierService.arm32v7}",
               "createOptions": ""
+            }
+          },
+          "onnx-image-classifier-service": {
+            "version": "1.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "${MODULES.ONNXImageClassifierService.arm32v7}",
+              "createOptions": {
+                "HostConfig": {
+                  "PortBindings": {
+                    "8088/tcp": [ { "HostPort":"8088"}]
+                  }
+                }
+              }
             }
           }
         }
